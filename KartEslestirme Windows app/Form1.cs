@@ -14,6 +14,12 @@ namespace KartEslestirme_Windows_app
 
         Button firstClicked = null;
         Button secondClicked = null;
+
+        DateTime startTime; // Oyunun baþladýðý zamaný saklamak için
+
+        System.Windows.Forms.Timer gameTimer = new System.Windows.Forms.Timer(); // Zamanlayýcýyý tanýmla
+
+
         public Form1()
         {
             InitializeComponent();
@@ -21,8 +27,18 @@ namespace KartEslestirme_Windows_app
             t.Interval = 3000;
             revealTimer.Tick += RevealTimer_Tick;
             revealTimer.Interval = 1000;
+            gameTimer.Tick += GameTimer_Tick; // Zamanlayýcý tick olayýna GameTimer_Tick metodunu baðla
+            gameTimer.Interval = 1000; // Her saniyede bir iþlem yapmasý için interval'ý 1000 ms olarak ayarla
             show();
             t.Start(); // Timer'ý baþlatýn
+            startTime = DateTime.Now; // Oyunun baþladýðý zamaný kaydet
+            gameTimer.Start(); // Zamanlayýcýyý baþlat
+
+        }
+        private void GameTimer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan elapsedTime = DateTime.Now - startTime; // Geçen süreyi hesapla
+            lblTimer.Text = $"Geçen Zaman: {elapsedTime.Hours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}"; // Geçen süreyi etikete yazdýr
         }
         private void T_tick(object sender, EventArgs e)
         {
@@ -73,7 +89,8 @@ namespace KartEslestirme_Windows_app
                     // Tüm kartlar eþleþti mi kontrol et
                     if (AllCardsMatched())
                     {
-                        MessageBox.Show("Tebrikler! Baþarýlý bir þekilde tamamladýnýz!", "Oyun Tamamlandý");
+                        TimeSpan elapsedTime = DateTime.Now - startTime; // Geçen süreyi hesapla
+                        MessageBox.Show($"Tebrikler! Baþarýlý bir þekilde tamamladýnýz!\nTamamlama Süresi: {elapsedTime.TotalSeconds:F2} saniye", "Oyun Tamamlandý"); // Tamamlama süresini tebrikler mesajýna ekle
                     }
                     return;
                 }
@@ -124,7 +141,7 @@ namespace KartEslestirme_Windows_app
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-        
+
         }
         private void show()
         {
@@ -142,5 +159,7 @@ namespace KartEslestirme_Windows_app
                 }
             }
         }
+
+        
     }
 }

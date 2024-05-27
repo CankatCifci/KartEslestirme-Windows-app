@@ -44,6 +44,7 @@
             button14 = new Button();
             button15 = new Button();
             button16 = new Button();
+            lblTimer = new Label();
             SuspendLayout();
             // 
             // button1
@@ -222,11 +223,21 @@
             button16.TabIndex = 15;
             button16.UseVisualStyleBackColor = false;
             // 
+            // lblTimer
+            // 
+            lblTimer.AutoSize = true;
+            lblTimer.Location = new Point(657, 107);
+            lblTimer.Name = "lblTimer";
+            lblTimer.Size = new Size(87, 20);
+            lblTimer.TabIndex = 16;
+            lblTimer.Text = "zamanlayıcı";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(796, 453);
+            ClientSize = new Size(845, 505);
+            Controls.Add(lblTimer);
             Controls.Add(button16);
             Controls.Add(button15);
             Controls.Add(button14);
@@ -247,6 +258,7 @@
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -267,5 +279,6 @@
         private Button button14;
         private Button button15;
         private Button button16;
+        private Label lblTimer;
     }
 }
