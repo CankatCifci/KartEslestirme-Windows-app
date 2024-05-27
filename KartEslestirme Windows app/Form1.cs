@@ -33,8 +33,22 @@ namespace KartEslestirme_Windows_app
             t.Start(); // Timer'ý baþlatýn
             startTime = DateTime.Now; // Oyunun baþladýðý zamaný kaydet
             gameTimer.Start(); // Zamanlayýcýyý baþlat
-
+            this.KeyPreview = true; // Klavye olaylarýný Form'a iþlemek için
+            this.KeyDown += Form1_KeyDown; // Klavyeden tuþa basýldýðýnda olayý dinlemek için
         }
+
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Klavyeden R tuþuna basýldýðýnda ve R tuþu yalnýzca basýldýðýnda oyunu sýfýrla
+            if (e.KeyCode == Keys.R)
+            {
+                ResetGame();
+            }
+        }
+
+
+
         private void GameTimer_Tick(object sender, EventArgs e)
         {
             TimeSpan elapsedTime = DateTime.Now - startTime; // Geçen süreyi hesapla
@@ -127,17 +141,29 @@ namespace KartEslestirme_Windows_app
         }
         private void ResetGame()
         {
-            // Tüm kartlarýn rengini resetle
+
+            // Oyun zamanlayýcýsýný durdur
+            gameTimer.Stop();
+            t.Stop();
+
+            // Tüm kartlarýn rengini ve metinlerini sýfýrla
             foreach (Control control in Controls)
             {
                 if (control is Button item)
                 {
                     item.ForeColor = item.BackColor;
+                    item.Text = ""; // Kartlarýn üzerindeki metini temizle
+                    item.Enabled = true; // Butonlarý etkinleþtir
                 }
             }
 
             // Kartlarýn ikonlarýný yeniden karýþtýr
             show();
+
+            // Geçen zamaný sýfýrla ve zamanlayýcýyý yeniden baþlat
+            startTime = DateTime.Now;
+            gameTimer.Start();
+            t.Start();
         }
         private void Form1_Load(object sender, EventArgs e)
         {

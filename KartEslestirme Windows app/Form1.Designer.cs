@@ -45,6 +45,7 @@
             button15 = new Button();
             button16 = new Button();
             lblTimer = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
             // button1
@@ -232,11 +233,21 @@
             lblTimer.TabIndex = 16;
             lblTimer.Text = "zamanlayıcı";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(58, 458);
+            label1.Name = "label1";
+            label1.Size = new Size(319, 20);
+            label1.TabIndex = 17;
+            label1.Text = "R tuşuna tıklayarak yeni oyuna başlayabilirsiniz.";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(845, 505);
+            Controls.Add(label1);
             Controls.Add(lblTimer);
             Controls.Add(button16);
             Controls.Add(button15);
@@ -280,5 +291,6 @@
         private Button button15;
         private Button button16;
         private Label lblTimer;
+        private Label label1;
     }
 }
